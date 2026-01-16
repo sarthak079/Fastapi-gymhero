@@ -1,10 +1,18 @@
 from fastapi import FastAPI,Depends
+from contextlib import asynccontextmanager
 from sqlmodel import Field, create_engine, Session, select, SQLModel
 from .database import get_session,create_db_and_tables
-from .models import Hero, Workout, Exercise
+from .models import Hero
 from app.routers import users, auth,workout,exercises
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app:FastAPI):
+    # Startup code
+    create_db_and_tables()
+    yield
+    # Shutdown code (if any)
+
+app = FastAPI(lifespan=lifespan)
 
 @app.on_event("startup")
 def on_startup():

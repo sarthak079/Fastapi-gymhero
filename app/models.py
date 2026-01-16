@@ -11,7 +11,6 @@ class UserCreate(BaseModel):
 
 # Pydantic model for reading user data (response)
 # This ensures the hashed_password is never exposed.
-
 class UserPublic(BaseModel):
     id:int
     email:str
@@ -33,7 +32,6 @@ class Hero(SQLModel,table=True):
     # but a list of related Workout objects.
     # 'back_populates' points to the 'user' attribute on the Workout model.
     workouts: List["Workout"] = Relationship(back_populates="user")
-
 
 class Workout(SQLModel,table=True):
     id:Optional[int]=Field(default=None,primary_key=True)
