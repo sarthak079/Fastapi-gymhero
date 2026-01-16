@@ -34,4 +34,4 @@ A high-performance backend API for gym and workout management built with **FastA
 
 Start the development server:
 ```bash
-uvicorn main:app --reload
+uvicorn app.main:app --reload
